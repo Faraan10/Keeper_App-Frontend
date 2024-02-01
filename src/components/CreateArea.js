@@ -6,6 +6,7 @@ import updateApiData from "../api/updateApiData";
 import deleteApiData from "../api/deleteApiData";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
+import Spinner from "../components/Spinner";
 
 function CreateArea() {
   const [data, setData] = useState({
@@ -22,6 +23,7 @@ function CreateArea() {
   const [id, setId] = useState();
 
   const [zoomIn, setZoomIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -30,6 +32,7 @@ function CreateArea() {
   const getData = async () => {
     const response = await getApiData();
     setInfo(response);
+    setLoading(false);
   };
 
   const postData = async (values) => {
@@ -82,34 +85,38 @@ function CreateArea() {
   };
 
   useEffect(() => {
+    setLoading(true);
     getData();
   }, []);
 
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <form
         onSubmit={update ? handleUpdate : handleSubmit}
         className="create-note"
       >
-        {zoomIn && (
-          <input
-            placeholder="Title"
-            required
-            name="title"
-            value={title}
-            onChange={handleChange}
-          />
-        )}
-
-        <textarea
-          placeholder="Take a note..."
-          rows={zoomIn ? 3 : 1}
+        <input
+          placeholder="Title"
           required
-          name="content"
-          value={content}
+          name="title"
+          value={title}
           onChange={handleChange}
           onClick={handleClick}
         />
+
+        {zoomIn && (
+          <textarea
+            placeholder="Take a note..."
+            rows={zoomIn ? 3 : 1}
+            required
+            name="content"
+            value={content}
+            onChange={handleChange}
+          />
+        )}
 
         {zoomIn && (
           <Zoom in={true}>

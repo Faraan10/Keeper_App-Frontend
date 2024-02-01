@@ -45,6 +45,7 @@ footer p {
   margin: 16px;
   float: left;
   width:22%;
+  position: relative;
 }
 .note h1 {
   font-size: 1.1em;
@@ -100,12 +101,12 @@ form.create-note button {
   right: 15px;
   bottom: -20px;
   background: #f5ba13;
-  font-size:11px;
+  font-size:10px;
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   outline: none;
@@ -114,6 +115,9 @@ form.create-note button {
 .align-buttons{
   text-align: end;
   color:#f5ba13;
+  position: absolute;
+  bottom: 10px;
+  right:10px;
 }
 
 .align{
